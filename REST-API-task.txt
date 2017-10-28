@@ -88,3 +88,12 @@ class YoutubeOSAnalytics(models.Model):
 •	фильтрацию по количеству view_rate в Youtube (диапазон значений);
 •	Авторизовать доступ только к тем, Youtube объектам у которых id четный.
 
+======================РЕШЕНИЕ================================================
+Накидал базу на три канала(VeloBiysk, LiveGarden, AltayNature) ,
+три страны (RU, US, CA), три девайса (PC, mobile, tablet),
+два гендера (male, female) и три возратсных группы (13-25, 25-50, 51-80)
+
+Таблицу YoutubeDemographicsAnalytics разделил на две
+YoutubeSexAnalytics и  YoutubeAgeGroupAnalytics  - так как-то понятнее выглядит
+
+
