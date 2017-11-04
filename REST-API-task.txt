@@ -97,3 +97,5 @@ class YoutubeOSAnalytics(models.Model):
 YoutubeSexAnalytics и  YoutubeAgeGroupAnalytics  - так как-то понятнее выглядит
 
 
+Вход в админку:
+admin  ==>>  rest-api
