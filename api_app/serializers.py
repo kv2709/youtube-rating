@@ -5,7 +5,7 @@ from api_app.models import Youtube
 class YoutubeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Youtube
-        fields = ('id', 'name', 'title', 'view_rate')
+        fields = ('id', 'name', 'title', 'view_rate' , 'calc_rate_request')
 
     def create(self, validated_data):
         """
@@ -20,6 +20,6 @@ class YoutubeSerializer(serializers.ModelSerializer):
         instance.name = validated_data.get('name', instance.name)
         instance.title = validated_data.get('title', instance.title)
         instance.view_rate = validated_data.get('view_rate', instance.view_rate)
-
+        instance.calc_rate_request = validated_data.get('calc_rate_request', instance.calc_rate_request)
         instance.save()
         return instance

@@ -5,10 +5,10 @@ class Youtube(models.Model):
     name = models.CharField(max_length=255)
     title = models.TextField(blank=True, null=True)
     view_rate = models.DecimalField(default=0, max_digits=14, decimal_places=7)
-
+    calc_rate_request = models.DecimalField(default=0, max_digits=14, decimal_places=7)
     def __str__(self):
         """Return string value model"""
-        return str(self.name)
+        return str(self.name) + ' ' + str(self.view_rate)
 
 class YoutubeGeoAnalytics(models.Model):
     class Meta:
