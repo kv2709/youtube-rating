@@ -4,7 +4,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     url(r'^$', views.index),
-    url(r'^api_app/$', views.youtube_list),
-    url(r'^api_app/(?P<pk>[0-9]+)/$', views.youtube_detail),]
+    url(r'^channel/$', views.youtube_list),
+    url(r'^channel_filter/$', views.youtube_filter),]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
