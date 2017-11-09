@@ -150,15 +150,12 @@ def youtube_filter(request, format=None):
     """
     if request.method == 'GET':
         query_str = request.environ['QUERY_STRING']
-        request_dict = {}
-        res = False
         if query_str != "":
             range_filter_str = request.GET.get('range', '')
             try:
                 list_range = range_filter_str.split("-")
                 beg_range = float(list_range[0])
                 end_range = float(list_range[1])
-                res = True
                 youtube_channels = Youtube.objects.all()
                 youtube_channels_filter = youtube_channels.filter(view_rate__gte=beg_range, view_rate__lte=end_range)
                 serializer = YoutubeSerializer(youtube_channels_filter, many=True)
@@ -166,6 +163,10 @@ def youtube_filter(request, format=None):
             except:
                 error_dict = {"result_request": "Error in value argument"}
                 return Response(error_dict)
+        else:
+            youtube_channels = Youtube.objects.all()
+            serializer = YoutubeSerializer(youtube_channels, many=True)
+            return Response(serializer.data)
 
 
 
@@ -175,10 +176,14 @@ def youtube_detail(request, pk, format=None):
     Retrieve, update or delete a code channel.
     """
     try:
-        youtube_channel = Youtube.objects.get(pk=pk)
+        if int(pk) % 2 == 0:
+            youtube_channel = Youtube.objects.get(pk=pk)
+        else:
+            error_dict = {'Error access': 'Access is allowed only to fields with an even id value'}
+            return Response(error_dict)
     except Youtube.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
+        error_dict = {'Error access': 'Model with id='+ str(pk) + ' does not exist'}
+        return Response(error_dict)#status=status.HTTP_404_NOT_FOUND
     if request.method == 'GET':
         serializer = YoutubeSerializer(youtube_channel)
         return Response(serializer.data)
