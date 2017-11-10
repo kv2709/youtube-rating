@@ -16,6 +16,7 @@ def calculate_rating(request_dict):
     osd = request_dict['os']
 
     youtube_query_set = Youtube.objects.all()
+    print(request_dict)
     for youtube_channel in youtube_query_set:
         name_channel_l = youtube_channel.name
         count_views_channel = float(Youtube.objects.get(name = name_channel_l).view_rate)
@@ -27,8 +28,7 @@ def calculate_rating(request_dict):
         if geo != '' and geo not in list_geo_unique:
             return False
         if geo != '':
-            rating_geo = float(Youtube.objects.get(name=name_channel_l).country_views.filter(country_code=geo).
-                               values("viewer_percentage")[0]['viewer_percentage'])
+            rating_geo = float(Youtube.objects.get(name=name_channel_l).country_views.filter(country_code=geo).values("viewer_percentage")[0]['viewer_percentage'])
         else:
             rating_geo = 1
         #----------------------age------------------------------------------------------------
@@ -39,8 +39,7 @@ def calculate_rating(request_dict):
         if age != '' and age not in list_age_unique:
             return False
         if age != '':
-            rating_age = float(Youtube.objects.get(name=name_channel_l).age_views.filter(age_group=age).
-                               values("viewer_percentage")[0]['viewer_percentage'])
+            rating_age = float(Youtube.objects.get(name=name_channel_l).age_views.filter(age_group=age).values("viewer_percentage")[0]['viewer_percentage'])
         else:
             rating_age = 1
         #----------------------gender------------------------------------------------------------
@@ -51,8 +50,7 @@ def calculate_rating(request_dict):
         if gen != '' and gen not in list_gender_unique:
             return False
         if gen != '':
-            rating_gen = float(Youtube.objects.get(name=name_channel_l).gender_views.filter(gender=gen).
-                               values("viewer_percentage")[0]['viewer_percentage'])
+            rating_gen = float(Youtube.objects.get(name=name_channel_l).gender_views.filter(gender=gen).values("viewer_percentage")[0]['viewer_percentage'])
         else:
             rating_gen = 1
         #---------------------------device-------------------------------------------------
@@ -63,8 +61,7 @@ def calculate_rating(request_dict):
         if dev != '' and dev not in list_device_unique:
             return False
         if dev != '':
-            rating_dev = float(Youtube.objects.get(name=name_channel_l).device_views.filter(device_type=dev).
-                               values("viewer_percentage")[0]['viewer_percentage'])
+            rating_dev = float(Youtube.objects.get(name=name_channel_l).device_views.filter(device_type=dev).values("viewer_percentage")[0]['viewer_percentage'])
         else:
             rating_dev = 1
         #------------------------------OS---------------------------------------------
@@ -75,13 +72,11 @@ def calculate_rating(request_dict):
         if osd != '' and osd not in list_os_unique:
             return False
         if osd != '':
-            rating_osd = float(Youtube.objects.get(name=name_channel_l).os_views.filter(os=osd).
-                               values("viewer_percentage")[0]['viewer_percentage'])
+            rating_osd = float(Youtube.objects.get(name=name_channel_l).os_views.filter(os=osd).values("viewer_percentage")[0]['viewer_percentage'])
         else:
             rating_osd = 1
         #------------------------------------------------------------------------------------
-        sum_rating = count_views_channel * rating_geo * rating_age * \
-                     rating_gen * rating_dev * rating_osd
+        sum_rating = count_views_channel * rating_geo * rating_age * rating_gen * rating_dev * rating_osd
         youtube_channel.calc_rate_request = sum_rating
         youtube_channel.save()
         #------------------------------------------------------------------------------------
@@ -161,7 +156,7 @@ def youtube_detail(request, pk, format=None):
             return Response(error_dict)
     except Youtube.DoesNotExist:
         error_dict = {'Error access': 'Model with id='+ str(pk) + ' does not exist'}
-        return Response(error_dict)#status=status.HTTP_404_NOT_FOUND
+        return Response(error_dict)
     if request.method == 'GET':
         serializer = YoutubeSerializer(youtube_channel)
         return Response(serializer.data)
