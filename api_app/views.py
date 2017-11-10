@@ -25,7 +25,7 @@ def calculate_rating(request_dict):
         list_geo_unique = []
         for i in range(len(list_dict_geo_unique)):
             list_geo_unique.append(list_dict_geo_unique[i]["country_code"])
-        if geo not in list_geo_unique:
+        if geo != '' and geo not in list_geo_unique:
             return False
         if geo != '':
             rating_geo = float(Youtube.objects.get(name=name_channel_l).country_views.filter(country_code=geo).
@@ -37,7 +37,7 @@ def calculate_rating(request_dict):
         list_age_unique = []
         for i in range(len(list_dict_age_unique)):
             list_age_unique.append(list_dict_age_unique[i]["age_group"])
-        if age not in list_age_unique:
+        if age != '' and age not in list_age_unique:
             return False
         if age != '':
             rating_age = float(Youtube.objects.get(name=name_channel_l).age_views.filter(age_group=age).
@@ -49,7 +49,7 @@ def calculate_rating(request_dict):
         list_gender_unique = []
         for i in range(len(list_dict_gender_unique)):
             list_gender_unique.append(list_dict_gender_unique[i]["gender"])
-        if gen not in list_gender_unique:
+        if gen != '' and gen not in list_gender_unique:
             return False
         if gen != '':
             rating_gen = float(Youtube.objects.get(name=name_channel_l).gender_views.filter(gender=gen).
@@ -61,7 +61,7 @@ def calculate_rating(request_dict):
         list_device_unique = []
         for i in range(len(list_dict_device_unique)):
             list_device_unique.append(list_dict_device_unique[i]["device_type"])
-        if dev not in list_device_unique:
+        if dev != '' and dev not in list_device_unique:
             return False
         if dev != '':
             rating_dev = float(Youtube.objects.get(name=name_channel_l).device_views.filter(device_type=dev).
@@ -73,7 +73,7 @@ def calculate_rating(request_dict):
         list_os_unique = []
         for i in range(len(list_dict_os_unique)):
             list_os_unique.append(list_dict_os_unique[i]["os"])
-        if osd not in list_os_unique:
+        if osd != '' and osd not in list_os_unique:
             return False
         if osd != '':
             rating_osd = float(Youtube.objects.get(name=name_channel_l).os_views.filter(os=osd).
