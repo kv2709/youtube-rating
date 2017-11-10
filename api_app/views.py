@@ -79,6 +79,7 @@ def calculate_rating(request_dict):
         sum_rating = count_views_channel * rating_geo * rating_age * rating_gen * rating_dev * rating_osd
         youtube_channel.calc_rate_request = sum_rating
         youtube_channel.save()
+        print(str(youtube_channel.calc_rate_request))
         #------------------------------------------------------------------------------------
 
     return True
@@ -93,8 +94,6 @@ def youtube_list(request, format=None):
     """
     if request.method == 'GET':
         query_str = request.environ['QUERY_STRING']
-        print(query_str)
-
         request_dict = {}
         res = False
         if query_str != "":
