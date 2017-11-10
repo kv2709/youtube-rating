@@ -1,1 +1,1 @@
-web: gunicorn loadfile_pjt.wsgi --log-file -
+web: gunicorn djresrapi_pjt.wsgi --log-file -
