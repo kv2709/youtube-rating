@@ -97,5 +97,7 @@ class YoutubeOSAnalytics(models.Model):
 YoutubeSexAnalytics и  YoutubeAgeGroupAnalytics  - так как-то понятнее выглядит
 
 
-Вход в админку:
+Вход в админку локально:
 admin  ==>>  rest-api
+Вход в админку на сервере:
+admin  ==>>  youtube-rating

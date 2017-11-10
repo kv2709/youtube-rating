@@ -25,7 +25,7 @@ SECRET_KEY = '3pidzgu78+g=syff4zg41%=6*so9+0*cy*+jb+ow&#ys%f=1sp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -144,7 +144,7 @@ if cwd == '/app' or cwd[:4] == '/tmp':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     # Only allow heroku to host the project.
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['youtube-rating.herokuapp.com']
     DEBUG = False
 
     # Static asset configuration
