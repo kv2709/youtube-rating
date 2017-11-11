@@ -21,7 +21,7 @@ def calculate_rating(request_dict):
     for youtube_channel in youtube_query_set:
         name_channel_l = youtube_channel.name
         count_views_channel = float(Youtube.objects.get(name = name_channel_l).view_rate)
-        print(name_channel_l + '' + str(count_views_channel))
+        print(name_channel_l + ' = ' + str(count_views_channel))
 
         list_dict_geo_unique = YoutubeGeoAnalytics.objects.all().values("country_code").distinct()
         list_geo_unique = []
