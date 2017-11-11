@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Django REST Framework</title>
+    <style>
+        h2{text-align: center;
+           color: darkblue
+        }
+        a{font-style: italic}
+        .host_name{
+            font-style: italic;
+            color: darkblue;
+        }
+        .var_name{
+            font-style: italic;
+            font-weight: bold ;
+            color: darkblue;
+        }
+    </style>
 </head>
+
 <body>
 
 <h2>Сортировка блогов по желаемой целевой аудитории</h2>
 <p>
     Дана модель канала youtube, статистики канала.
-    Статистика хранится в процентах (поле viewer_percentage),
+    Статистика хранится в процентах (поле <span class="var_name">viewer_percentage</span>),
     например канал1, os linux, 30%. Что означает, что 30 процентов
     подписчиков канала использует операционную систему linux.
     Конкретные значения именований статистик не важны, можно
@@ -46,28 +62,31 @@
 
 <ul>
     <li>cортировку по целевой аудитории;</li>
-    <li>фильтрацию по количеству view_rate в Youtube (диапазон значений);</li>
-    <li>авторизовать доступ только к тем, Youtube объектам у которых id четный.</li>
+    <li>фильтрацию по количеству <span class="var_name">view_rate -- Youtube</span>
+        (диапазон значений);</li>
+    <li>авторизовать доступ только к тем, <span class="var_name">Youtube</span>
+        объектам, у которых <span class="var_name">id</span> четный.</li>
 </ul>
 
-<h3 align="center">Решение</h3>
+<h2>Решение</h2>
 
 <h4>Сортировка по целевой аудитории</h4>
 <p>
-    Модельная база данных заполенна на 3 канала, 3 страны, 3 возрастных группы, 2 гендера,
+    Модельная база данных заполенна на 4 канала, 4 страны, 3 возрастных группы, 2 гендера,
     3 вида девайсов, 4 вида операционных систем. Возможные значения аргументов для выполения
     запроса следующие:
 </p>
 <p>
-    YoutubeGeoAnalytics -- country_code
+    <span class="var_name">country_code -- YoutubeGeoAnalytics
 </p>
 <ul>
     <li>'RU'</li>
     <li>'US'</li>
     <li>'CA'</li>
+    <li>'DE'</li>
 </ul>
 <p>
-    YoutubeAgeGroupAnalytics -- age_group
+    <span class="var_name">age_group -- YoutubeAgeGroupAnalytics</span>
 </p>
 <ul>
     <li>'13-25'</li>
@@ -75,14 +94,14 @@
     <li>'51-80'</li>
 </ul>
 <p>
-    YoutubeSexAnalytics -- gender
+    <span class="var_name">gender -- YoutubeSexAnalytics</span>
 </p>
 <ul>
     <li>'male'</li>
     <li>'female'</li>
 </ul>
 <p>
-    YoutubeDeviceAnalytics -- device_type
+    <span class="var_name">device_type -- YoutubeDeviceAnalytics</span>
 </p>
 <ul>
     <li>'PC'</li>
@@ -90,7 +109,7 @@
     <li>'mobile'</li>
 </ul>
 <p>
-    YoutubeOsAnalytics -- os
+    <span class="var_name">os -- YoutubeOsAnalytics</span>
 </p>
 <ul>
     <li>'W'</li>
@@ -100,28 +119,30 @@
 </ul>
 
 
-
-<p> Адрес для запроса hostname/channel/ <br>
+<p> Адрес для запроса <span class="host_name">hostname/channel/</span><br>
     Если аргумент отсуствуте в запросе или назван некорректно, по в расчете рейтинга процент по нему
-    принимается равный 100, то есть как все варианты. При некорректном значении аргумента,
+    принимается равный 1, то есть как все варианты. При некорректном значении аргумента,
     запрос не обрабатывается и возвращатся значание ошибки. При пустом запросе - возвращается
     результат последнего расчета рейтинга.
 </p>
 
-<h4>Фильтрацию по количеству view_rate в Youtube (диапазон значений)</h4>
+<h4>Фильтрацию по количеству <span class="var_name">view_rate -- Youtube</span> (диапазон значений)</h4>
 <p>
-    Адрес для запроса hostname/channel_filter/ <br>
-    Аргумент запроса "range", допустимые значения в диапазоне "0-2500"
+    Адрес для запроса <span class="host_name">hostname/channel_filter/</span><br>
+    Аргумент запроса <span class="var_name">range</span>,
+    допустимые значения в диапазоне <span class="var_name">0-2500</span>
 </p>
 
-<h4>Авторизация доступа к Youtube объектам, у которых id четный</h4>
+<h4>Авторизация доступа к <span class="var_name">Youtube</span> объектам, у которых <span class="var_name">id</span>
+    четный</h4>
 
 <p>
-    Адрес для запроса hostname/channel/n<br>
-    где n - значание id объекта в базе данных
+    Адрес для запроса <span class="host_name">hostname/channel/n</span><br>
+    где <span class="var_name">n</span> - значание <span class="var_name">id</span>
+    объекта в базе данных
 </p>
 
 <p><a href="https://github.com/kv2709/youtube-rating.git" target="_blank">
-           Исходники проекта на GIT</a></p>
+    Исходники проекта на GIT</a></p>
 </body>
 </html>
