@@ -27,6 +27,7 @@ def calculate_rating(request_dict):
         list_geo_unique = []
         for i in range(len(list_dict_geo_unique)):
             list_geo_unique.append(list_dict_geo_unique[i]["country_code"])
+        print(list_geo_unique)
         if geo != '' and geo not in list_geo_unique:
             return False
         if geo != '':
