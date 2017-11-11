@@ -16,13 +16,11 @@ def calculate_rating(request_dict):
     osd = request_dict['os']
 
     youtube_query_set = Youtube.objects.all()
-    print(request_dict)
 
     for youtube_channel in youtube_query_set:
         name_channel_l = youtube_channel.name
         id_channel = youtube_channel.id
         count_views_channel = float(Youtube.objects.get(name = name_channel_l).view_rate)
-        print(str(id_channel)+ ' ' + name_channel_l + ' = ' + str(count_views_channel))
 
         list_dict_geo_unique = YoutubeGeoAnalytics.objects.all().values("country_code").distinct()
         list_geo_unique = []
@@ -84,11 +82,7 @@ def calculate_rating(request_dict):
         sum_rating = count_views_channel * rating_geo * rating_age * rating_gen * rating_dev * rating_osd
         youtube_channel.calc_rate_request = sum_rating
         youtube_channel.save()
-        print(str(youtube_channel.calc_rate_request))
-
     return True
-
-
 
 
 @api_view(['GET'])
@@ -115,8 +109,6 @@ def youtube_list(request, format=None):
         else:
             error_dict = {"result_request": "Error in value argument"}
             return Response(error_dict)
-
-
 
 
 @api_view(['GET'])
