@@ -27,11 +27,12 @@ def calculate_rating(request_dict):
         list_geo_unique = []
         for i in range(len(list_dict_geo_unique)):
             list_geo_unique.append(list_dict_geo_unique[i]["country_code"])
-        print(list_geo_unique)
+        print(list_geo_unique, geo)
         if geo != '' and geo not in list_geo_unique:
             return False
         if geo != '':
             rating_geo = float(Youtube.objects.get(name=name_channel_l).country_views.filter(country_code=geo).values("viewer_percentage")[0]['viewer_percentage'])
+            print(str(rating_geo))
         else:
             rating_geo = 1
 
